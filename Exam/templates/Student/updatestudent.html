@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Update Student</title>
+</head>
+<body class="bg-light">
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card shadow border-0">
+                    <div class="card-header bg-warning text-dark text-center py-3">
+                        <h3>Update Student: {{ s.sname }}</h3>
+                    </div>
+                    <div class="card-body p-4">
+                        <form method="POST" action="{% url 'updatestudent' s.sid %}">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <label class="form-label text-muted small">Student ID (Cannot be changed)</label>
+                                <input type="number" value="{{ s.sid }}" class="form-control bg-light" readonly>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Full Name</label>
+                                <input type="text" name="sname" value="{{ s.sname }}" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Email Address</label>
+                                <input type="email" name="semail" value="{{ s.semail }}" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Password</label>
+                                <input type="text" name="spassword" value="{{ s.spassword }}" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Department</label>
+                                <select name="sdept" class="form-select">
+                                    <option value="CS" {% if s.sdepartment == "CS" %}selected{% endif %}>Computer Science</option>
+                                    <option value="IT" {% if s.sdepartment == "IT" %}selected{% endif %}>Information Technology</option>
+                                    <option value="MECH" {% if s.sdepartment == "MECH" %}selected{% endif %}>Mechanical</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-warning w-100 fw-bold">Save Changes</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam Results | ExamApp</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --primary-dark: #1a237e;
+            --success-main: #2e7d32;
+            --fail-main: #d32f2f;
+        }
+        body { 
+            background: #f4f7f6; 
+            min-height: 100vh; 
+            display: flex; 
+            align-items: center; 
+            font-family: 'Inter', sans-serif;
+        }
+        .result-card {
+            border: none;
+            border-radius: 24px;
+            overflow: hidden;
+            background: white;
+        }
+        .status-header {
+            padding: 40px 20px;
+            color: white;
+            transition: 0.5s;
+        }
+        /* Dynamic Colors based on Pass/Fail */
+        .pass-bg { background: linear-gradient(135deg, #43a047, #1b5e20); }
+        .fail-bg { background: linear-gradient(135deg, #e53935, #b71c1c); }
+        
+        .score-circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 8px solid rgba(255,255,255,0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: -75px auto 20px;
+            background: white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        .percentage-text {
+            font-size: 2.5rem;
+            font-weight: 900;
+            line-height: 1;
+        }
+        .pass-text { color: var(--success-main); }
+        .fail-text { color: var(--fail-main); }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+            <div class="card result-card shadow-lg">
+                
+                {% if score >= 10 %} 
+                    <div class="status-header text-center pass-bg">
+                        <i class="bi bi-trophy-fill display-3"></i>
+                        <h2 class="fw-bold mt-2">Congratulations!</h2>
+                        <p class="opacity-75">You have successfully passed the exam.</p>
+                    </div>
+                {% else %}
+                    <div class="status-header text-center fail-bg">
+                        <i class="bi bi-exclamation-octagon-fill display-3"></i>
+                        <h2 class="fw-bold mt-2">Keep Practicing!</h2>
+                        <p class="opacity-75">You didn't reach the passing mark this time.</p>
+                    </div>
+                {% endif %}
+
+                <div class="card-body pt-0 text-center">
+                    <div class="score-circle">
+                        <span class="percentage-text {% if score >= 10 %}pass-text{% else %}fail-text{% endif %}">
+                            {% widthratio score total 100 %}%
+                        </span>
+                        <small class="text-muted fw-bold">SCORE</small>
+                    </div>
+
+                    <div class="my-4">
+                        <h4 class="fw-bold text-dark">{{ name|upper }}</h4>
+                        <div class="d-flex justify-content-center gap-4 mt-3">
+                            <div class="text-center">
+                                <small class="text-muted d-block">Correct</small>
+                                <span class="badge bg-success fs-6 px-3">{{ score }}</span>
+                            </div>
+                            <div class="text-center">
+                                <small class="text-muted d-block">Total</small>
+                                <span class="badge bg-secondary fs-6 px-3">{{ total }}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr class="my-4 opacity-25">
+
+                    <div class="d-grid gap-3 px-4 pb-4">
+                        <a href="{% url 'home' %}" class="btn btn-dark btn-lg rounded-pill shadow-sm py-3">
+                            <i class="bi bi-house-door me-2"></i> Return to Home
+                        </a>
+                        <a href="{% url 'logout' %}" class="btn btn-outline-danger btn-sm border-0">
+                            Log Out
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <p class="text-center mt-4 text-muted small">Generated on 22nd March 2026</p>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,55 @@
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<div class="container mt-5">
+    <h2 class="text-primary">Add New Question</h2>
+    <form method="POST" class="card p-4 shadow">
+        {% csrf_token %}
+        <input type="number" name="qid" placeholder="Question ID" class="form-control mb-2">
+        <textarea name="qtext" placeholder="Enter Question" class="form-control mb-2"></textarea>
+        <button type="submit" class="btn btn-success">Save Question</button>
+    </form>
+</div>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Add Question</title>
+</head>
+<body class="bg-light">
+    <div class="container mt-5">
+        <div class="card shadow-sm mx-auto" style="max-width: 600px;">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0">Create New Question</h4>
+            </div>
+            <div class="card-body">
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label>Question ID</label>
+                        <input type="number" name="qid" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label>Question Text</label>
+                        <textarea name="qtext" class="form-control" rows="3" required></textarea>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-2"><input type="text" name="op1" placeholder="Option 1" class="form-control"></div>
+                        <div class="col-md-6 mb-2"><input type="text" name="op2" placeholder="Option 2" class="form-control"></div>
+                        <div class="col-md-6 mb-2"><input type="text" name="op3" placeholder="Option 3" class="form-control"></div>
+                        <div class="col-md-6 mb-2"><input type="text" name="op4" placeholder="Option 4" class="form-control"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label>Correct Answer</label>
+                        <input type="text" name="correct_ans" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label>Subject</label>
+                        <input type="text" name="subject" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn btn-success w-100">Save to Database</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

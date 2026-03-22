@@ -1,0 +1,33 @@
+<div class="container mt-5">
+    <div class="card shadow">
+        <div class="card-header bg-warning text-dark">
+            <h4>Update Question ID: {{ q.qid }}</h4>
+        </div>
+        <div class="card-body">
+            <form method="POST" action="{% url 'updatequestion' q.qid %}">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label>Question Text</label>
+                    <textarea name="qtext" class="form-control" rows="3">{{ q.qtext }}</textarea>
+                </div>
+                <div class="row mb-3">
+                    <div class="col"><input type="text" name="op1" value="{{ q.op1 }}" class="form-control"></div>
+                    <div class="col"><input type="text" name="op2" value="{{ q.op2 }}" class="form-control"></div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col"><input type="text" name="op3" value="{{ q.op3 }}" class="form-control"></div>
+                    <div class="col"><input type="text" name="op4" value="{{ q.op4 }}" class="form-control"></div>
+                </div>
+                <div class="mb-3">
+                    <label>Correct Answer</label>
+                    <input type="text" name="correct_ans" value="{{ q.correct_ans }}" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label>Subject</label>
+                    <input type="text" name="subject" value="{{ q.subject }}" class="form-control">
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Save Changes</button>
+            </form>
+        </div>
+    </div>
+</div>
